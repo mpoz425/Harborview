@@ -1,1 +1,6 @@
-node_modules
+node_modules/
+.next/
+.cache/
+public/images/original/  # if you keep original uncompressed images
+.DS_Store
+*.log
