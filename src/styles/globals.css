@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Background and text styling for consistency */
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f7f7f7; /* Light gray background */
+  color: #3e3e3e; /* Neutral text color */
+}
+
+a {
+  color: #116dff; /* Blue accent for links */
+  text-decoration: none;
+}
+
+button {
+  transition: all 0.3s ease;
+}
+
+/* Custom hover effect for buttons */
+button:hover {
+  transform: translateY(-2px);
+}
+
+/* Add these to your existing styles */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
