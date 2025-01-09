@@ -1,0 +1,28 @@
+{
+    "name": "harborview-market",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "next lint"
+    },
+    "dependencies": {
+      "next": "latest",
+      "react": "18.x",
+      "react-dom": "18.x",
+      "tailwindcss": "^3.x.x",
+      "postcss": "^8.x.x",
+      "autoprefixer": "^10.x.x",
+      "framer-motion": "^11.0.8"
+    },
+    "devDependencies": {
+      "eslint": "8.x",
+      "eslint-config-next": "12.x",
+      "@types/react": "^18.0.0",
+      "@types/node": "^17.0.4",
+      "@types/react-dom": "^18.0.0"
+    }
+  }
+  
