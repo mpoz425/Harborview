@@ -16,23 +16,23 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed left-0 right-0 top-0 z-50 bg-slate-50/50 shadow-sm">
+    <nav className="fixed left-0 right-0 top-0 z-50 bg-slate-50/50 backdrop-blur-sm">
       <div className="px-4">
-        <div className="flex h-24 md:h-40 items-center justify-between">
+        <div className="flex h-16 md:h-24 items-center justify-between">
+          {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-2 md:space-x-4 pl-2 md:pl-4 group">
-              <div className="transform transition-transform duration-300 group-hover:scale-110">
+            <Link href="/" className="flex items-center space-x-2 pl-2">
+              <div className="relative h-12 w-12 md:h-16 md:w-16">
                 <Image
                   src="/images/compressed/logo.png"
                   alt="Harborview Logo"
-                  width={200}
-                  height={200}
-                  className="h-16 md:h-32 w-auto"
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 48px, 64px"
                 />
               </div>
-              <span className="text-lg md:text-2xl font-bold text-gray-900 transform transition-all duration-300 group-hover:scale-105 inline-block relative after:content-[''] after:absolute after:w-0 after:h-1.5 after:left-0 after:-bottom-1 after:bg-primary-purple after:transition-all after:duration-300 group-hover:after:w-full">
-                <span className="hidden sm:inline">Navigating Financial Markets</span>
-                <span className="sm:hidden">Harborview</span>
+              <span className="text-lg md:text-xl font-bold text-gray-900">
+                <span className="hidden sm:inline">Harborview</span>
               </span>
             </Link>
           </div>
@@ -40,7 +40,7 @@ const Navbar = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2"
+            className="md:hidden p-2 rounded-lg hover:bg-gray-100"
             aria-label="Toggle menu"
           >
             <div className="w-6 h-5 flex flex-col justify-between">
@@ -50,45 +50,32 @@ const Navbar = () => {
             </div>
           </button>
 
-          {/* Navigation Links - Desktop */}
-          <div className="hidden md:flex items-center">
-            <div className="flex space-x-10 mr-8">
-              <a 
-                href="#about" 
-                className="text-xl transition-all duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:left-0 after:-bottom-1 after:bg-primary-purple after:transition-all after:duration-300 hover:after:w-full text-gray-900 hover:text-primary-purple"
-              >
-                About
-              </a>
-              <a 
-                href="#services" 
-                className="text-xl transition-all duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:left-0 after:-bottom-1 after:bg-primary-purple after:transition-all after:duration-300 hover:after:w-full text-gray-900 hover:text-primary-purple"
-              >
-                Services
-              </a>
-              <a
-                href="#contact"
-                onClick={handleContactClick}
-                className="text-xl transition-all duration-300 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:left-0 after:-bottom-1 after:bg-primary-purple after:transition-all after:duration-300 hover:after:w-full text-gray-900 hover:text-primary-purple"
-              >
-                Contact
-              </a>
-            </div>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <a href="#about" className="nav-link">About</a>
+            <a href="#services" className="nav-link">Services</a>
+            <a href="#contact" onClick={handleContactClick} className="nav-link">Contact</a>
           </div>
         </div>
 
         {/* Mobile menu */}
-        <div className={`md:hidden fixed inset-x-0 bg-white transition-all duration-300 ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
-          <div className="pb-4 space-y-2 shadow-lg">
+        <div 
+          className={`
+            md:hidden fixed inset-x-0 top-16 bg-white shadow-lg transform transition-transform duration-300 ease-in-out
+            ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'}
+          `}
+        >
+          <div className="py-2">
             <a 
               href="#about" 
-              className="block text-lg text-gray-900 hover:text-primary-purple px-6 py-3 active:bg-gray-100"
+              className="block px-4 py-3 text-gray-900 hover:bg-gray-100"
               onClick={() => setIsMenuOpen(false)}
             >
               About
             </a>
             <a 
               href="#services" 
-              className="block text-lg text-gray-900 hover:text-primary-purple px-6 py-3 active:bg-gray-100"
+              className="block px-4 py-3 text-gray-900 hover:bg-gray-100"
               onClick={() => setIsMenuOpen(false)}
             >
               Services
@@ -99,7 +86,7 @@ const Navbar = () => {
                 handleContactClick(e);
                 setIsMenuOpen(false);
               }}
-              className="block text-lg text-gray-900 hover:text-primary-purple px-6 py-3 active:bg-gray-100"
+              className="block px-4 py-3 text-gray-900 hover:bg-gray-100"
             >
               Contact
             </a>

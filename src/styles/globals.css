@@ -69,3 +69,17 @@ button {
     scroll-behavior: smooth;
   }
 }
+
+/* Add to your existing styles */
+.nav-link {
+  @apply text-gray-900 hover:text-primary-purple transition-colors duration-300 relative;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute left-0 -bottom-1 w-0 h-0.5 bg-primary-purple transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
+}
