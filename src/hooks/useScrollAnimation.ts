@@ -6,11 +6,16 @@ export const useScrollAnimation = () => {
   useEffect(() => {
     const currentElement = elementRef.current;
 
+    // Check if device is mobile
+    const isMobile = window.innerWidth < 768;
+
     const options: IntersectionObserverInit = {
       root: null,
-      rootMargin: '0px',
-      // Create multiple threshold points for smoother animation
-      threshold: Array.from({ length: 100 }, (_, i) => i / 100)
+      rootMargin: isMobile ? '-10px' : '0px', // Smaller margin on mobile for better performance
+      // Fewer threshold points on mobile for better performance
+      threshold: isMobile 
+        ? [0, 0.25, 0.5, 0.75, 1] 
+        : Array.from({ length: 100 }, (_, i) => i / 100)
     };
 
     const handleIntersection: IntersectionObserverCallback = (entries) => {
@@ -18,12 +23,13 @@ export const useScrollAnimation = () => {
         if (currentElement) {
           // Calculate opacity based on intersection ratio
           const opacity = entry.intersectionRatio;
-          const translateY = 50 * (1 - entry.intersectionRatio); // Start at 50px up, move to 0
+          // Reduced transform distance on mobile
+          const translateY = (isMobile ? 30 : 50) * (1 - entry.intersectionRatio);
 
-          // Apply smooth transform and opacity
+          // Apply smooth transform and opacity with reduced motion on mobile
           currentElement.style.opacity = opacity.toString();
           currentElement.style.transform = `translateY(${translateY}px)`;
-          currentElement.style.transition = 'transform 0.3s ease-out';
+          currentElement.style.transition = `transform ${isMobile ? '0.2s' : '0.3s'} ease-out`;
         }
       });
     };
@@ -31,12 +37,13 @@ export const useScrollAnimation = () => {
     const observer = new IntersectionObserver(handleIntersection, options);
 
     if (currentElement) {
-      // Set initial state
+      // Set initial state with reduced transform on mobile
       currentElement.style.opacity = '0';
-      currentElement.style.transform = 'translateY(50px)';
+      currentElement.style.transform = `translateY(${isMobile ? '30px' : '50px'})`;
       observer.observe(currentElement);
     }
 
+    // Cleanup function
     return () => {
       if (currentElement) {
         observer.unobserve(currentElement);

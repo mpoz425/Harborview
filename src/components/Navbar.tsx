@@ -77,18 +77,18 @@ const Navbar = () => {
         </div>
 
         {/* Mobile menu */}
-        <div className={`md:hidden transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-48' : 'max-h-0'}`}>
-          <div className="pb-4 space-y-4">
+        <div className={`md:hidden fixed inset-x-0 bg-white transition-all duration-300 ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
+          <div className="pb-4 space-y-2 shadow-lg">
             <a 
               href="#about" 
-              className="block text-lg text-gray-900 hover:text-primary-purple px-4 py-2"
+              className="block text-lg text-gray-900 hover:text-primary-purple px-6 py-3 active:bg-gray-100"
               onClick={() => setIsMenuOpen(false)}
             >
               About
             </a>
             <a 
               href="#services" 
-              className="block text-lg text-gray-900 hover:text-primary-purple px-4 py-2"
+              className="block text-lg text-gray-900 hover:text-primary-purple px-6 py-3 active:bg-gray-100"
               onClick={() => setIsMenuOpen(false)}
             >
               Services
@@ -99,7 +99,7 @@ const Navbar = () => {
                 handleContactClick(e);
                 setIsMenuOpen(false);
               }}
-              className="block text-lg text-gray-900 hover:text-primary-purple px-4 py-2"
+              className="block text-lg text-gray-900 hover:text-primary-purple px-6 py-3 active:bg-gray-100"
             >
               Contact
             </a>

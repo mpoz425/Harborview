@@ -15,7 +15,8 @@
       "tailwindcss": "^3.x.x",
       "postcss": "^8.x.x",
       "autoprefixer": "^10.x.x",
-      "framer-motion": "^11.0.8"
+      "framer-motion": "^11.0.8",
+      "critters": "^0.0.20"
     },
     "devDependencies": {
       "eslint": "8.x",

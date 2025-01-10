@@ -9,13 +9,14 @@ import Footer from '../components/layout/Footer';
 
 export default function Home() {
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <Head>
         <title>Harborview Markets</title>
         <meta name="description" content="Sleek financial advisory services" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </Head>
       <Navbar />
-      <main>
+      <main className="flex-grow">
         <Hero />
         <About />
         <Services />

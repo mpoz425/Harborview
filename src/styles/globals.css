@@ -7,6 +7,27 @@ body {
   font-family: 'Open Sans', sans-serif;
   background-color: #f7f7f7; /* Light gray background */
   color: #3e3e3e; /* Neutral text color */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+  overscroll-behavior-y: none; /* Prevent pull-to-refresh on mobile */
+}
+
+/* Optimize touch interactions */
+@media (max-width: 768px) {
+  * {
+    cursor: default !important; /* Remove hover states on mobile */
+  }
+
+  /* Improve touch targets */
+  button, 
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Reduce motion for better performance */
+  * {
+    transition-duration: 200ms !important;
+  }
 }
 
 a {
@@ -18,9 +39,11 @@ button {
   transition: all 0.3s ease;
 }
 
-/* Custom hover effect for buttons */
-button:hover {
-  transform: translateY(-2px);
+/* Custom hover effect for buttons - only on desktop */
+@media (min-width: 769px) {
+  button:hover {
+    transform: translateY(-2px);
+  }
 }
 
 /* Add these to your existing styles */
@@ -38,4 +61,11 @@ button:hover {
 
 .rotate-y-180 {
   transform: rotateY(180deg);
+}
+
+/* Add smooth scrolling but disable on mobile for better performance */
+@media (min-width: 769px) {
+  html {
+    scroll-behavior: smooth;
+  }
 }

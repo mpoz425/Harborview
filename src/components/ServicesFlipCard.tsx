@@ -1,9 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import { getImageQuality, getImageSize } from '../utils/imageLoader';
 
 const ServicesFlipCard = () => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+    
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <div className="relative w-full min-h-[600px]">
@@ -19,29 +32,32 @@ const ServicesFlipCard = () => {
           >
             {/* Front content */}
             <div className="flex flex-col md:flex-row items-center">
-              {/* Image section */}
-              <div className="w-full md:w-1/2 md:-mr-32 mt-[-20px] z-0">
-                <div className="relative h-[600px] rounded-lg overflow-hidden shadow-2xl">
+              {/* Image section - Adjusted for better mobile display */}
+              <div className="w-full md:w-1/2 md:-mr-32 mt-4 md:mt-[-20px] z-0">
+                <div className="relative h-[300px] md:h-[600px] rounded-lg overflow-hidden shadow-2xl">
                   <Image
                     src="/images/compressed/services.jpg"
                     alt="Our Services"
                     fill
                     className="object-cover"
-                    quality={90}
+                    quality={isMobile ? 75 : 90}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority={false}
+                    loading="lazy"
                   />
                 </div>
               </div>
 
-              {/* Text section */}
-              <div className="w-full md:w-[60%] bg-white p-8 md:p-12 rounded-lg shadow-xl z-10">
-                <h2 className="text-4xl font-bold text-primary-purple mb-4">Services</h2>
-                <p className="text-gray-700 mb-6 text-lg">
+              {/* Text section - Improved mobile spacing */}
+              <div className="w-full md:w-[60%] bg-white p-6 md:p-12 rounded-lg shadow-xl z-10 mt-4 md:mt-0">
+                <h2 className="text-3xl md:text-4xl font-bold text-primary-purple mb-4">Services</h2>
+                <p className="text-gray-700 mb-6 text-base md:text-lg">
                   We bring our extensive experience in responding to the dynamic nature of 
                   financial markets directly to you.
                 </p>
                 <button 
                   onClick={() => setIsFlipped(true)}
-                  className="bg-primary-purple text-white px-8 py-4 rounded-lg hover:bg-opacity-90 transition-all duration-300"
+                  className="w-full md:w-auto bg-primary-purple text-white px-6 md:px-8 py-3 md:py-4 rounded-lg hover:bg-opacity-90 transition-all duration-300"
                 >
                   Explore Services
                 </button>
@@ -57,20 +73,23 @@ const ServicesFlipCard = () => {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="absolute w-full"
           >
-            <div className="bg-white p-6 md:p-8 rounded-lg shadow-xl">
-              <h2 className="text-3xl font-bold text-primary-purple mb-6">Our Services</h2>
+            <div className="bg-white p-4 md:p-8 rounded-lg shadow-xl">
+              <h2 className="text-2xl md:text-3xl font-bold text-primary-purple mb-4 md:mb-6">Our Services</h2>
               
-              <div className="space-y-8">
-                {/* First section - Image on left */}
-                <div className="flex flex-col md:flex-row gap-2 items-center">
-                  <div className="md:w-1/3 flex justify-center">
-                    <div className="relative w-[180px] h-[180px] rounded-full overflow-hidden shadow-xl border-4 border-primary-purple">
+              <div className="space-y-6 md:space-y-8">
+                {/* Service sections - Improved mobile layout */}
+                {/* First section */}
+                <div className="flex flex-col md:flex-row gap-4 md:gap-2 items-center">
+                  <div className="w-full md:w-1/3 flex justify-center">
+                    <div className="relative w-[140px] md:w-[180px] h-[140px] md:h-[180px] rounded-full overflow-hidden shadow-xl border-4 border-primary-purple">
                       <Image
                         src="/images/compressed/navigate.jpg"
                         alt="Market Structure Changes"
                         fill
                         className="object-cover"
-                        quality={95}
+                        quality={isMobile ? 70 : 85}
+                        sizes="(max-width: 768px) 140px, 180px"
+                        loading="lazy"
                       />
                     </div>
                   </div>
@@ -91,10 +110,10 @@ const ServicesFlipCard = () => {
                   </div>
                 </div>
 
-                {/* Second section - Image on right */}
-                <div className="flex flex-col md:flex-row-reverse gap-2 items-center">
-                  <div className="md:w-1/3 flex justify-center">
-                    <div className="relative w-[180px] h-[180px] rounded-full overflow-hidden shadow-xl border-4 border-primary-purple">
+                {/* Second section */}
+                <div className="flex flex-col md:flex-row-reverse gap-4 md:gap-2 items-center">
+                  <div className="w-full md:w-1/3 flex justify-center">
+                    <div className="relative w-[140px] md:w-[180px] h-[140px] md:h-[180px] rounded-full overflow-hidden shadow-xl border-4 border-primary-purple">
                       <Image
                         src="/images/compressed/operation.jpg"
                         alt="Operational Efficiencies"
@@ -118,10 +137,10 @@ const ServicesFlipCard = () => {
                   </div>
                 </div>
 
-                {/* Third section - Image on left */}
-                <div className="flex flex-col md:flex-row gap-2 items-center">
-                  <div className="md:w-1/3 flex justify-center">
-                    <div className="relative w-[180px] h-[180px] rounded-full overflow-hidden shadow-xl border-4 border-primary-purple">
+                {/* Third section */}
+                <div className="flex flex-col md:flex-row gap-4 md:gap-2 items-center">
+                  <div className="w-full md:w-1/3 flex justify-center">
+                    <div className="relative w-[140px] md:w-[180px] h-[140px] md:h-[180px] rounded-full overflow-hidden shadow-xl border-4 border-primary-purple">
                       <Image
                         src="/images/compressed/strategy.jpg"
                         alt="Strategic Product Innovation"
@@ -148,7 +167,7 @@ const ServicesFlipCard = () => {
 
               <button 
                 onClick={() => setIsFlipped(false)}
-                className="mt-8 bg-primary-purple text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-all duration-300"
+                className="w-full md:w-auto mt-6 md:mt-8 bg-primary-purple text-white px-4 md:px-6 py-3 rounded-lg hover:bg-opacity-90 transition-all duration-300"
               >
                 Back to Overview
               </button>
