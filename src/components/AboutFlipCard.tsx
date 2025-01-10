@@ -19,29 +19,35 @@ const AboutFlipCard = () => {
           >
             {/* Front content */}
             <div className="flex flex-col md:flex-row items-center">
-              <div className="w-full md:w-[60%] bg-white p-8 md:p-12 rounded-lg shadow-xl z-10">
-                <h2 className="text-4xl font-bold text-primary-purple mb-4">About Us</h2>
-                <p className="text-gray-700 mb-6 text-lg">
+              {/* Image section - Adjusted for better mobile display */}
+              <div className="w-full md:w-1/2 md:-mr-32 mt-4 md:mt-[-20px] z-0">
+                <div className="relative h-[300px] md:h-[600px] rounded-lg overflow-hidden shadow-2xl">
+                  <Image
+                    src="/images/compressed/about.jpg"
+                    alt="About Us"
+                    fill
+                    className="object-cover"
+                    quality={90}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority={false}
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* Text section - Improved mobile spacing */}
+              <div className="w-full md:w-[60%] bg-white p-6 md:p-12 rounded-lg shadow-xl z-10 mt-4 md:mt-0">
+                <h2 className="text-3xl md:text-4xl font-bold text-primary-purple mb-4">About Us</h2>
+                <p className="text-gray-700 mb-6 text-base md:text-lg">
                   Harborview Markets has over 40 years of experience in financial advisory services. 
                   We help clients navigate complex markets with confidence and achieve lasting success.
                 </p>
                 <button 
                   onClick={() => setIsFlipped(true)}
-                  className="bg-primary-purple text-white px-8 py-4 rounded-lg hover:bg-opacity-90 transition-all duration-300"
+                  className="w-full md:w-auto bg-primary-purple text-white px-6 md:px-8 py-3 md:py-4 rounded-lg hover:bg-opacity-90 transition-all duration-300"
                 >
                   Learn More
                 </button>
-              </div>
-              <div className="w-full md:w-1/2 md:-ml-32 mt-[-20px]">
-                <div className="relative h-[600px] rounded-lg overflow-hidden shadow-2xl">
-                  <Image
-                    src="/images/compressed/about.jpg"
-                    alt="About Harborview Markets"
-                    fill
-                    className="object-cover"
-                    quality={90}
-                  />
-                </div>
               </div>
             </div>
           </motion.div>
